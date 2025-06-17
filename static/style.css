@@ -1,0 +1,158 @@
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f9fc;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form input[type="text"],
+    .form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+    }
+
+    .form input:focus,
+    .form textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    .form button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form button:hover {
+        background-color: #0056b3;
+    }
+
+    .list-card {
+        background: #f1f5ff;
+        border: 1px solid #d0e0ff;
+        border-radius: 10px;
+        padding: 15px;
+        margin-top: 15px;
+        transition: transform 0.2s ease;
+    }
+
+    .list-card:hover {
+        transform: scale(1.02);
+    }
+
+    .note-title {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #222;
+    }
+
+    .note-desc {
+        margin: 8px 0;
+        font-size: 1em;
+        color: #444;
+    }
+
+    .list-card a {
+        margin-right: 15px;
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .list-card a:hover {
+        text-decoration: underline;
+    }
+
+    form input[type="text"],
+    form textarea {
+        resize: vertical;
+    }
+
+    form button + button {
+        background-color: #6c757d;
+        margin-left: 10px;
+    }
+
+    form button + button:hover {
+        background-color: #5a6268;
+    }
+
+
+    .list-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list-card form input[type="text"],
+.list-card form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.list-card form input:focus,
+.list-card form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.list-card form button {
+    padding: 8px 14px;
+    font-size: 1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.list-card form button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+.list-card form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.list-card form button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+}
+
+.list-card form button[type="button"]:hover {
+    background-color: #5a6268;
+}
+

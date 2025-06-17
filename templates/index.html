@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function editNote(id) {
+            let card = document.getElementById(`note-${id}`);
+            let title = card.querySelector(".note-title").innerText;
+            let description = card.querySelector(".note-desc").innerText;
+
+            // Replace content with an editable form
+            card.innerHTML = `
+                <form onsubmit="saveNote(event, ${id})">
+                    <input type="text" name="title" value="${title}" required>
+                    <textarea name="description" rows="4" required>${description}</textarea>
+                    <button type="submit">Save</button>
+                    <button type="button" onclick="cancelEdit(${id}, '${title}', '${description}')">Cancel</button>
+                </form>
+            `;
+        }
+
+        function cancelEdit(id, title, description) {
+            let card = document.getElementById(`note-${id}`);
+            card.innerHTML = `
+                <strong class="note-title">${title}</strong>
+                <div class="note-desc">${description}</div>
+                <a href="/delete/${id}">Delete</a>
+                <a href="javascript:void(0)" onclick="editNote(${id})">Edit</a>
+            `;
+        }
+
+        function saveNote(event, id) {
+            event.preventDefault();
+            let form = event.target;
+            let title = form.title.value;
+            let description = form.description.value;
+
+            fetch(`/edit/${id}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`
+            }).then(() => {
+                cancelEdit(id, title, description); // Restore updated content
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h3 class="title">Notes App</h3>
+        <form action="/add" class="form" method="POST">
+            <input type="text" name="title" placeholder="Heading" required>
+            <textarea name="description" rows="4" placeholder="Description" required></textarea>
+            <button type="submit">ADD</button>
+        </form>
+        <div>
+            {% for note in notes %}
+            <div class="list-card" id="note-{{ note['id'] }}">
+                <strong class="note-title">{{ note['title'] }}</strong>
+                <div class="note-desc">{{ note['description'] }}</div>
+                <a href="/delete/{{ note['id'] }}">Delete</a>
+                <a href="javascript:void(0)" onclick="editNote({{ note['id'] }})">Edit</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
