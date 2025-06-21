@@ -49,19 +49,36 @@
     </script>
 </head>
 <body>
+    
+
     <div class="container">
+        <div class="flash-message">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
         <h3 class="title">Notes App</h3>
-        <form action="/add" class="form" method="POST">
+        <form action="{{ url_for('add', username=username) }}" class="form" method="POST">
             <input type="text" name="title" placeholder="Heading" required>
             <textarea name="description" rows="4" placeholder="Description" required></textarea>
             <button type="submit">ADD</button>
+            <a href="{{ url_for('logout') }}">Logout</a></p>
         </form>
         <div>
             {% for note in notes %}
             <div class="list-card" id="note-{{ note['id'] }}">
                 <strong class="note-title">{{ note['title'] }}</strong>
                 <div class="note-desc">{{ note['description'] }}</div>
-                <a href="/delete/{{ note['id'] }}">Delete</a>
+                <!-- <a href="/delete/{{ note['id'] }}">Delete</a> -->
+                 <!-- <a href="{{ url_for('delete', id=note['id'], username=note['username']) }}">Delete</a> -->
+                <a href="{{ url_for('delete', id=note['id'], username=note['username']) }}">Delete</a>
+
                 <a href="javascript:void(0)" onclick="editNote({{ note['id'] }})">Edit</a>
             </div>
             {% endfor %}
